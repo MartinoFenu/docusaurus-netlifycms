@@ -1,0 +1,85 @@
+#backend:
+#  name: git-gateway
+
+# using local repository and server
+#local_backend: true
+
+backend:
+  name: github #bitbucket or gitlab
+  repo: MartinoFenu/docusaurus-netlifycms
+  branch: main
+
+publish_mode: editorial_workflow
+media_folder: "/static/img/uploads"
+site_url: https://practical-goldberg-58e0f7.netlify.app
+display_url: https://practical-goldberg-58e0f7.netlify.app
+show_preview_links: true
+
+collections:
+  - name: 'docs'
+    label: 'Docs'
+    label_singular: 'Doc'
+    folder: 'docs'
+    path: '{{category}}/{{id}}'
+    create: true
+    slug: '{{id}}'
+    identifier_field: 'title'
+    extension: 'md'
+    format: 'frontmatter'
+    editor:
+      preview: false
+    preview_path: 'docs/{{category}}/{{id}}'
+    fields:
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Slug', name: 'id', widget: 'string' }
+      - { label: 'Category', name: 'category', widget: 'string', default: 'docs' }
+      - { label: 'Hide Title', name: 'hide_title', widget: 'boolean', default: false }
+      - { label: 'Hide Table of Contents', name: 'hide_table_of_contents', widget: 'boolean', default: false }
+      - { label: 'Sidebar Label', name: 'sidebar_label', widget: 'string', required: false }
+      - { label: 'Keywords', name: 'keywords', widget: 'list', default: [], required: false }
+      - { label: 'Description', name: 'description', required: false }
+      - { label: 'Image', name: 'image', widget: 'image', allow_multiple: false, required: false }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'blog'
+    label: 'Blog'
+    folder: 'blog'
+    create: true
+    slug: '{{date}}-{{id}}'
+    identifier_field: 'title'
+    extension: 'md'
+    format: 'frontmatter'
+    editor:
+      preview: false
+    preview_path: 'blog/{{slug}}'
+    fields:
+      - { label: 'Slug', name: 'id', widget: 'string' }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Author', name: 'author', required: false }
+      - { label: 'Author Title', name: 'author_title', widget: 'string', required: false }
+      - { label: 'Author URL', name: 'author_url', widget: 'string', required: false }
+      - { label: 'Author Image', name: 'author_image_url', widget: 'image', allow_multiple: false, required: false }
+      - { label: 'Hide Table of Contents', name: 'hide_table_of_contents', widget: 'boolean', default: false }
+      - { label: 'Tags', name: 'tags', widget: 'list', default: [], required: false }
+      - { label: 'Draft', name: 'draft', widget: 'boolean', default: true }
+      - { label: 'Date', name: 'date', widget: 'datetime', format: 'YYYY-MM-DD', timeFormat: false }
+      - { label: 'Description', name: 'description', required: false }
+      - { label: 'Image', name: 'image', widget: 'image', allow_multiple: false, required: false }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
+  - name: 'pages'
+    label: 'Pages'
+    label_singular: 'Page'
+    folder: 'src/pages'
+    path: '{{id}}'
+    create: true
+    slug: '{{id}}'
+    identifier_field: 'title'
+    extension: 'js'
+    format: 'frontmatter'
+    editor:
+      preview: false
+    preview_path: 'pages/{{id}}'
+    fields:
+      - { label: 'Slug', name: 'id', widget: 'string' }
+      - { label: 'Title', name: 'title', widget: 'string' }
+      - { label: 'Description', name: 'description', required: false }
+      - { label: 'Body', name: 'body', widget: 'markdown' }
